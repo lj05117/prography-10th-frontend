@@ -6,6 +6,7 @@ import ProgressStage from "../../components/ProgressStage.tsx";
 import Header from "../../components/Header.tsx";
 import styled from "styled-components";
 import { useState } from "react";
+import PageTitle from "../../components/PageTitle.tsx";
 
 const Container = styled.div`
   position: fixed;
@@ -30,6 +31,13 @@ const ContentContainer = styled.div`
 export default function RecruitFunnel() {
   const [recruitData, setRecruitData] = useState();
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
+
+  const titles = ["개인정보 수집 동의", "기본 정보", "지원 정보"];
+  const descriptions = [
+    "프로그라피 10기 지원을 위한 개인정보 수집에 대한 동의가 필요합니다",
+    "연락 가능한 정보를 입력해주세요",
+    "지원하고자 하는 분야를 선택해주세요",
+  ];
   return (
     <>
       <Container>
@@ -37,6 +45,11 @@ export default function RecruitFunnel() {
         <>{step < 4 && <ProgressStage step={step} />}</>
       </Container>
       <ContentContainer>
+        <>
+          {step < 4 && (
+            <PageTitle title={titles[step]} description={descriptions[step]} />
+          )}
+        </>
         <>
           {step === 1 && (
             <PrivacyPolicy
