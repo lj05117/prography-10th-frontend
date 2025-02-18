@@ -27,14 +27,20 @@ const Container = styled.div`
 const ContentContainer = styled.div`
   padding-top: 100px; /* 헤더 + 진행 바 높이만큼 패딩 추가 */
   text-align: center;
+  width: 100%;
+`;
+
+const PageTitleContainer = styled.div`
+  width: 100%;
 `;
 
 export default function RecruitFunnel() {
   const [recruitData, setRecruitData] = useState();
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
 
-  const titles = ["개인정보 수집 동의", "기본 정보", "지원 정보"];
+  const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
+    "",
     "프로그라피 10기 지원을 위한 개인정보 수집에 대한 동의가 필요합니다",
     "연락 가능한 정보를 입력해주세요",
     "지원하고자 하는 분야를 선택해주세요",
@@ -46,11 +52,11 @@ export default function RecruitFunnel() {
         <>{step < 4 && <ProgressStage step={step} />}</>
       </Container>
       <ContentContainer>
-        <>
-          {step < 4 && (
+        <PageTitleContainer>
+          {step < 4 ? (
             <PageTitle title={titles[step]} description={descriptions[step]} />
-          )}
-        </>
+          ) : null}
+        </PageTitleContainer>
         <>
           {step === 1 && (
             <PrivacyPolicy
@@ -87,12 +93,20 @@ export default function RecruitFunnel() {
       </ContentContainer>
       <>
         {step < 4 && (
-          <Button variant={step !== 1 ? "primary" : "secondary"} size="small">
+          <Button
+            variant={step !== 1 ? "primary" : "secondary"}
+            size="small"
+            onClick={() => setStep((prev) => Math.max(1, prev - 1))}
+          >
             뒤로
           </Button>
         )}
         {step < 4 && (
-          <Button variant="primary" size="small">
+          <Button
+            variant="primary"
+            size="small"
+            onClick={() => setStep((prev) => Math.min(4, prev + 1))}
+          >
             {step !== 3 ? "다음" : "제출하기"}
           </Button>
         )}

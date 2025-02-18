@@ -1,5 +1,6 @@
 import { useRecoilState } from "recoil";
 import { selectedRadioState } from "../stores/ButtonState";
+import { RoundedBorderBox } from "../styles/layout.ts";
 
 interface RadioProps {
   id: number;
@@ -10,12 +11,12 @@ export default function RadioButtonComponent({ id, label }: RadioProps) {
 
   return (
     <>
-      <div onClick={() => setSelectedValue(id)}>
+      <RoundedBorderBox onClick={() => setSelectedValue(id)}>
         <label>
           <input id={`id`} type="radio" checked={selectedValue === id} />
           {label}
         </label>
-      </div>
+      </RoundedBorderBox>
     </>
   );
 }
