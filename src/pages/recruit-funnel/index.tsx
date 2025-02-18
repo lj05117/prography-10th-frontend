@@ -6,6 +6,7 @@ import Complete from "./Complete.tsx";
 export default function RecruitFunnel() {
   return (
     <>
+      <div>Prography 10기 지원서</div>
       <PrivacyPolicy />
       <PersonalInfo />
       <ApplicationInfo />
