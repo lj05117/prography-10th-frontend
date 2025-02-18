@@ -7,6 +7,7 @@ import Header from "../../components/Header.tsx";
 import styled from "styled-components";
 import { useState } from "react";
 import PageTitle from "../../components/PageTitle.tsx";
+import Button from "../../styles/button.ts";
 
 const Container = styled.div`
   position: fixed;
@@ -84,6 +85,18 @@ export default function RecruitFunnel() {
         {/*  //todo: 이 컴포넌트에서 tanstack query
         연결하기*/}
       </ContentContainer>
+      <>
+        {step < 4 && (
+          <Button variant={step !== 1 ? "primary" : "secondary"} size="small">
+            뒤로
+          </Button>
+        )}
+        {step < 4 && (
+          <Button variant="primary" size="small">
+            {step !== 3 ? "다음" : "제출하기"}
+          </Button>
+        )}
+      </>
     </>
   );
 }
