@@ -1,7 +1,7 @@
 import "./App.css";
 import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import Home from "./pages/Home";
-import RecruitFunnel from "./pages/recruit-funnel/index";
+import RecruitFunnel from "./pages/recruit-funnel/RecruitFunnel.tsx";
 import NotFound from "./pages/NotFound";
 
 function App() {
