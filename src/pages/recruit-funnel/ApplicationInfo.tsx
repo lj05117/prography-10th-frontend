@@ -2,9 +2,10 @@ import RecruitFunnel from "./RecruitFunnel.tsx";
 import Header from "../../components/Header.tsx";
 import ProgressStage from "../../components/ProgressStage.tsx";
 import RadioButtonComponent from "../../components/RadioButtonComponent.tsx";
+import ContentContainer from "../../components/ContentContainer.tsx";
 export default function ApplicationInfo() {
   return (
-    <>
+    <ContentContainer title={"지원 분야를 선택해주세요"}>
       <RadioButtonComponent
         id={1}
         name={"application"}
@@ -35,6 +36,6 @@ export default function ApplicationInfo() {
         name={"application"}
         label="Product Owner"
       ></RadioButtonComponent>
-    </>
+    </ContentContainer>
   );
 }
