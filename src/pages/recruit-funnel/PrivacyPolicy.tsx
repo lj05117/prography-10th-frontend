@@ -10,12 +10,13 @@ export default function PrivacyPolicy() {
   };
   return (
     <>
-      <div>
-        <div>수집 목적 : Prography 10기 리쿠르팅 과정 및 결과 안내</div>
-        <div>수집 항목 : 이름, 이메일, 핸드폰번호, 학교 정보 및 직장 정보</div>
-        <div>보유 및 이용 기간 : 리쿠르팅 과정 종료일(3월 7일) 이후 파기</div>
-      </div>
-      <ContentContainer title={"개인정보 수집 여부 동의 여부를 체크해주세요."}>
+      <ContentContainer
+        title={`수집 목적 : Prography 10기 리쿠르팅 과정 및 결과 안내
+        수집 항목 : 이름, 이메일, 핸드폰번호, 학교 정보 및 직장 정보
+        보유 및 이용 기간 : 리쿠르팅 과정 종료일(3월 7일) 이후 파기 
+        
+        개인정보 수집 여부 동의 여부를 체크해주세요.`}
+      >
         <RadioButtonComponent
           id={1}
           name="privacyPolicy"

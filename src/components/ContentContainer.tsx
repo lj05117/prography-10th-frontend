@@ -14,6 +14,7 @@ const Title = styled.h2`
   font-weight: bold;
   color: #333;
   text-align: start;
+  white-space: pre-line;
 `;
 
 const Content = styled.div`
