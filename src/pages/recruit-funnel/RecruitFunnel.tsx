@@ -8,6 +8,8 @@ import styled from "styled-components";
 import { useState } from "react";
 import PageTitle from "../../components/PageTitle.tsx";
 import Button from "../../styles/button.ts";
+import { useRecoilValue } from "recoil";
+import { recruitState } from "../../stores/ButtonState.ts";
 
 const Container = styled.div`
   position: fixed;
@@ -35,8 +37,8 @@ const PageTitleContainer = styled.div`
 `;
 
 export default function RecruitFunnel() {
-  const [recruitData, setRecruitData] = useState();
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
+  const recruit = useRecoilValue(recruitState); // ✅ Recoil에서 값 가져오기
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -45,6 +47,32 @@ export default function RecruitFunnel() {
     "연락 가능한 정보를 입력해주세요",
     "지원하고자 하는 분야를 선택해주세요",
   ];
+
+  // ✅ 각 step별 필수 값 확인 함수
+  const validateStep = () => {
+    if (step === 1 && recruit.privacy !== 1) {
+      alert("개인정보 수집 동의 여부를 선택해주세요.");
+      return false;
+    }
+    if (step === 2) {
+      const { name, email, phone } = recruit.personal;
+      if (!name || !email || !phone) {
+        alert("모든 개인 정보를 입력해주세요.");
+        return false;
+      }
+    }
+    if (step === 3 && !recruit.application) {
+      alert("지원 정보를 입력해주세요.");
+      return false;
+    }
+    return true;
+  };
+
+  const handleNext = () => {
+    if (validateStep()) {
+      setStep((prev) => Math.min(4, prev + 1));
+    }
+  };
   return (
     <>
       <Container>
@@ -57,36 +85,9 @@ export default function RecruitFunnel() {
             <PageTitle title={titles[step]} description={descriptions[step]} />
           ) : null}
         </PageTitleContainer>
-        <>
-          {step === 1 && (
-            <PrivacyPolicy
-              onNext={(data) => {
-                setRecruitData((prev) => ({ ...prev, privacy: data }));
-                setStep(2);
-              }}
-            />
-          )}
-        </>
-        <>
-          {step === 2 && (
-            <PersonalInfo
-              onNext={(data) => {
-                setRecruitData((prev) => ({ ...prev, personal: data }));
-                setStep(3);
-              }}
-            />
-          )}
-        </>
-        <>
-          {step === 3 && (
-            <ApplicationInfo
-              onNext={(data) => {
-                setRecruitData((prev) => ({ ...prev, application: data }));
-                setStep(4);
-              }}
-            />
-          )}
-        </>
+        <>{step === 1 && <PrivacyPolicy />}</>
+        <>{step === 2 && <PersonalInfo />}</>
+        <>{step === 3 && <ApplicationInfo />}</>
         <>{step === 4 && <Complete />}</>
         {/*  //todo: 이 컴포넌트에서 tanstack query
         연결하기*/}
@@ -102,11 +103,7 @@ export default function RecruitFunnel() {
           </Button>
         )}
         {step < 4 && (
-          <Button
-            variant="primary"
-            size="small"
-            onClick={() => setStep((prev) => Math.min(4, prev + 1))}
-          >
+          <Button variant="primary" size="small" onClick={handleNext}>
             {step !== 3 ? "다음" : "제출하기"}
           </Button>
         )}
