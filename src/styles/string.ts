@@ -17,5 +17,11 @@ export const StyledText = styled.div`
   color: ${(props) => textColor[props.color] || textColor["black"]}; /* 기본 색상 검정 */
   font-weight: ${(props) => (props.size === "large" ? "bold" : "normal")}; /* 헤더는 bold */
   white-space: pre-line;
-    margin: 16px 0;
+  margin: 16px 0;
+  cursor: ${(props) => (props.hoverEffect ? "pointer" : "default")}; /* ✅ 마우스 커서 변경 */
+  transition: text-decoration 0.2s ease-in-out, color 0.2s ease-in-out; /* ✅ 부드러운 효과 */
+
+  &:hover {
+        text-decoration: ${(props) => (props.hoverEffect ? "underline" : "none")}; /* ✅ 마우스 호버 시 밑줄 */
+    }
 `;
