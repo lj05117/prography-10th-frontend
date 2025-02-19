@@ -6,14 +6,19 @@ interface RadioProps {
   id: number;
   label: string;
 }
-export default function RadioButtonComponent({ id, label }: RadioProps) {
+export default function RadioButtonComponent({ id, name, label }: RadioProps) {
   const [selectedValue, setSelectedValue] = useRecoilState(selectedRadioState);
 
   return (
     <>
       <RoundedBorderBox onClick={() => setSelectedValue(id)}>
         <label>
-          <input id={`id`} type="radio" checked={selectedValue === id} />
+          <input
+            type="radio"
+            name={name}
+            checked={selectedValue === id}
+            onChange={() => setSelectedValue(id)}
+          />
           {label}
         </label>
       </RoundedBorderBox>
