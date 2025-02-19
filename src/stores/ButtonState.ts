@@ -1,12 +1,38 @@
-import { atom } from "recoil";
+import { atom, selector } from "recoil";
 
-interface ButtonState {
-  isClicked: boolean | null;
+interface recruitState {
+  privacy: number | null;
+  personal: {
+    name: string;
+    email: string;
+    phone: string;
+  };
+  application: number | null;
 }
 
-export const selectedRadioState = atom<ButtonState>({
-  key: "selectedRadioState",
+export const recruitState = atom<recruitState>({
+  key: "recruitState",
   default: {
-    isClicked: null,
+    privacy: null,
+    personal: {
+      name: "",
+      email: "",
+      phone: "",
+    },
+    application: null,
   },
+});
+export const recruitPrivacyState = selector({
+  key: "recruitPrivacyState",
+  get: ({ get }) => get(recruitState).privacy,
+});
+
+export const recruitPersonalState = selector({
+  key: "recruitPersonalState",
+  get: ({ get }) => get(recruitState).personal,
+});
+
+export const recruitApplicationState = selector({
+  key: "recruitApplicationState",
+  get: ({ get }) => get(recruitState).application,
 });
