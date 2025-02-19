@@ -1,12 +1,13 @@
 import RadioButtonComponent from "../../components/RadioButtonComponent.tsx";
-import RecruitFunnel from "./RecruitFunnel.tsx";
-import Header from "../../components/Header.tsx";
-import ProgressStage from "../../components/ProgressStage.tsx";
-import styled from "styled-components";
-import Button from "../../styles/button.ts";
 import ContentContainer from "../../components/ContentContainer.tsx";
+import { useRecoilState } from "recoil";
+import { recruitState } from "../../stores/ButtonState.ts";
 
 export default function PrivacyPolicy() {
+  const [recruit, setRecruit] = useRecoilState(recruitState);
+  const handleSelect = (id: number) => {
+    setRecruit((prev) => ({ ...prev, privacy: id }));
+  };
   return (
     <>
       <div>
@@ -17,14 +18,19 @@ export default function PrivacyPolicy() {
       <ContentContainer title={"개인정보 수집 여부 동의 여부를 체크해주세요."}>
         <RadioButtonComponent
           id={1}
-          name={"privacyPolicy"}
+          name="privacyPolicy"
           label="개인정보 수집 여부에 동의합니다"
-        ></RadioButtonComponent>
+          onSelect={handleSelect}
+          selected={recruit.privacy === 1}
+        />
+
         <RadioButtonComponent
           id={2}
-          name={"privacyPolicy"}
+          name="privacyPolicy"
           label="개인정보 수집 여부에 동의하지 않습니다"
-        ></RadioButtonComponent>
+          onSelect={handleSelect}
+          selected={recruit.privacy === 2}
+        />
       </ContentContainer>
     </>
   );
