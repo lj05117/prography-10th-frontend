@@ -29,9 +29,9 @@ export default function Home() {
       <StyledText size={"large"} color={"blue"}>"프로답게, 재미있게"</StyledText>
       <StyledText>재밌있는 작당을 함께 만들어갈 10기에 합류하세요.</StyledText>
       <StyledText>자세한 정보는 아래 페이지에 담아뒀으니, 지원 전 꼭 확인해주세요</StyledText>
-      <StyledText color={"blue"}>프로그라피 10기 모집 자세히 알아보기</StyledText>
-      <StyledText color={"blue"}>공식 홈페이지</StyledText>
-      <StyledText color={"blue"}> 인스타그램</StyledText>
+      <StyledText color={"blue"} onClick={()=>window.location.href = "https://prography.org/about"}>프로그라피 10기 모집 자세히 알아보기</StyledText>
+      <StyledText color={"blue"} onClick={()=>window.location.href = "https://prography.org/"}>공식 홈페이지</StyledText>
+      <StyledText color={"blue"} onClick={()=>window.location.href = "https://www.instagram.com/prography_official/"}> 인스타그램</StyledText>
       <Button
         variant={"primary"}
         size="large"
