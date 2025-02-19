@@ -19,6 +19,13 @@ const StyledInput = styled.input`
   }
 `;
 
-export default function InputInfo({ placeholder, value }) {
-  return <StyledInput type="text" placeholder={placeholder} value={value} />;
+export default function InputInfo({ id, placeholder, value, onChange }) {
+  return (
+    <StyledInput
+      type="text"
+      placeholder={placeholder}
+      value={value}
+      onChange={(e) => onChange(id, e.target.value)}
+    />
+  );
 }
