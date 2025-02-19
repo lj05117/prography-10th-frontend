@@ -1,4 +1,7 @@
 import { atom, selector } from "recoil";
+import { recoilPersist } from "recoil-persist";
+
+const { persistAtom } = recoilPersist();
 
 interface recruitState {
   privacy: number | null;
@@ -21,6 +24,7 @@ export const recruitState = atom<recruitState>({
     },
     application: null,
   },
+  effects_UNSTABLE: [persistAtom],
 });
 export const recruitPrivacyState = selector({
   key: "recruitPrivacyState",
