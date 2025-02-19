@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const RoundedBorderBox = styled.div`
-  margin: 16px;
+  margin: 16px 0;
   border: 2px solid #ccc;
   border-radius: 12px;
   padding: 16px;
