@@ -1,50 +1,75 @@
-# React + TypeScript + Vite
+# 프로젝트 이름
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+프로그라피 사전 과제
 
-Currently, two official plugins are available:
+<br/>
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+# 기술 스택
 
-## Expanding the ESLint configuration
+- React 18
+- TypeScript
+- 상태관리 Recoil
+- 스타일링 StyledComponents
+- 번들러 Vite
+- 기타 라이브러리 (Tanstack Query)
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+<br/>
 
-- Configure the top-level `parserOptions` property like this:
+# 설치 및 실행 방법
 
-```js
-export default tseslint.config({
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
+- 설치
+
+```
+git clone https://github.com/lj05117/prography-10th-frontend.git
+cd prography-10th-frontend
 ```
 
-- Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
-- Optionally add `...tseslint.configs.stylisticTypeChecked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and update the config:
+- 실행
 
-```js
-// eslint.config.js
-import react from 'eslint-plugin-react'
+```
+nvm install v20.9.0
+nvm use v20.9.0
+yarn install
+yarn dev
+```
 
-export default tseslint.config({
-  // Set the react version
-  settings: { react: { version: '18.3' } },
-  plugins: {
-    // Add the react plugin
-    react,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended rules
-    ...react.configs.recommended.rules,
-    ...react.configs['jsx-runtime'].rules,
-  },
-})
+# 폴더 구조
+
+```
+📦src
+ ┣ 📂assets
+ ┃ ┣ 📜Logo.png
+ ┃ ┗ 📜react.svg
+ ┣ 📂components
+ ┃ ┣ 📜ContentContainer.tsx
+ ┃ ┣ 📜Header.tsx
+ ┃ ┣ 📜InputInfo.tsx
+ ┃ ┣ 📜PageTitle.tsx
+ ┃ ┣ 📜ProgressStage.tsx
+ ┃ ┗ 📜RadioButtonComponent.tsx
+ ┣ 📂hooks
+ ┃ ┗ 📜recruit-funnel.ts
+ ┣ 📂pages
+ ┃ ┣ 📂recruit-funnel
+ ┃ ┃ ┣ 📜ApplicationInfo.tsx
+ ┃ ┃ ┣ 📜Complete.tsx
+ ┃ ┃ ┣ 📜PersonalInfo.tsx
+ ┃ ┃ ┣ 📜PrivacyPolicy.tsx
+ ┃ ┃ ┗ 📜RecruitFunnel.tsx
+ ┃ ┣ 📜Home.tsx
+ ┃ ┗ 📜NotFound.tsx
+ ┣ 📂services
+ ┃ ┗ 📜recruit-funnel.ts
+ ┣ 📂stores
+ ┃ ┗ 📜ButtonState.ts
+ ┣ 📂styles
+ ┃ ┣ 📜button.ts
+ ┃ ┣ 📜layout.ts
+ ┃ ┣ 📜progress-stage.ts
+ ┃ ┗ 📜string.ts
+ ┣ 📜App.css
+ ┣ 📜App.tsx
+ ┣ 📜index.css
+ ┣ 📜main.tsx
+ ┗ 📜vite-env.d.ts
 ```
