@@ -3,8 +3,9 @@ import styled from "styled-components";
 export const ProgressContainer = styled.div`
   display: flex;
   align-items: center;
-  justify-content: center;
-  margin: 20px 0;
+    width: 100%;
+  justify-content: space-between;
+    margin: 0 100px;
 `;
 
 export const StepCircle = styled.div<{ $active: boolean }>`
@@ -24,7 +25,7 @@ export const StepCircle = styled.div<{ $active: boolean }>`
 `;
 
 export const StepBar = styled.div<{ $active?: boolean }>`
-  width: 50px;
+    flex-grow: 1;
   height: 5px;
   background-color: ${({ $active }) => ($active ? "#007bff" : "#ddd")};
   transition: background-color 0.3s;
