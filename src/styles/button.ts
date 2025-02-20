@@ -5,7 +5,14 @@ interface ButtonProps {
   size?: "small" | "large" | "wide"; // 버튼 크기 설정
 }
 
-const Button = styled.button<ButtonProps>`
+export const ButtonContainer = styled.div`
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  margin: 0 auto;
+`
+
+export const Button = styled.button<ButtonProps>`
   border: none;
   font-size: 16px;
   font-weight: bold;
@@ -31,5 +38,3 @@ const Button = styled.button<ButtonProps>`
       variant === "primary" ? "#0056b3" : "#aaa"};
   }
 `;
-
-export default Button;

@@ -1,6 +1,6 @@
 import logoImage from "../assets/Logo.png";
 import styled from "styled-components";
-import Button from "../styles/button.ts";
+import { Button } from "../styles/button.ts";
 import { useNavigate } from "react-router-dom";
 import { StyledText } from "../styles/string.ts";
 

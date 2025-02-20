@@ -7,7 +7,7 @@ import Header from "../../components/Header.tsx";
 import styled from "styled-components";
 import { useState } from "react";
 import PageTitle from "../../components/PageTitle.tsx";
-import Button from "../../styles/button.ts";
+import { Button, ButtonContainer } from "../../styles/button.ts";
 import { useRecoilValue } from "recoil";
 import { recruitState } from "../../stores/ButtonState.ts";
 import {useRecruitMutation} from "../../hooks/recruit-funnel.ts";
@@ -115,7 +115,7 @@ const {mutateAsync} = useRecruitMutation();
         {/*  //todo: 이 컴포넌트에서 tanstack query
         연결하기*/}
       </ContentContainer>
-      <>
+      <ButtonContainer>
         {step < 4 && (
           <Button
             variant={step !== 1 ? "primary" : "secondary"}
@@ -130,7 +130,7 @@ const {mutateAsync} = useRecruitMutation();
             {step !== 3 ? "다음" : "제출하기"}
           </Button>
         )}
-      </>
+      </ButtonContainer>
     </>
   );
 }

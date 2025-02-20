@@ -1,7 +1,4 @@
-import RecruitFunnel from "./RecruitFunnel.tsx";
-import Header from "../../components/Header.tsx";
-import ProgressStage from "../../components/ProgressStage.tsx";
-import Button from "../../styles/button.ts";
+import { Button } from "../../styles/button.ts";
 import { useNavigate } from "react-router-dom";
 
 export default function Complete() {
