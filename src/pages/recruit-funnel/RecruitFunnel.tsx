@@ -38,7 +38,7 @@ const PageTitleContainer = styled.div`
 
 export default function RecruitFunnel() {
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
-  const recruit = useRecoilValue(recruitState); // ✅ Recoil에서 값 가져오기
+  const recruit = useRecoilValue(recruitState);
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -48,7 +48,6 @@ export default function RecruitFunnel() {
     "지원하고자 하는 분야를 선택해주세요",
   ];
 
-  // ✅ 각 step별 필수 값 확인 함수
   const validateStep = () => {
     if (step === 1 && recruit.privacy !== 1) {
       alert("개인정보 수집 동의 여부를 선택해주세요.");
@@ -68,11 +67,28 @@ export default function RecruitFunnel() {
     return true;
   };
 
+  const scrollToTop = () => {
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  const handleBefore = ()=>{
+    if(step!==1){
+      scrollToTop()
+      setStep(step-1)
+    }
+  }
   const handleNext = () => {
     if (validateStep()) {
+      scrollToTop()
       setStep((prev) => Math.min(4, prev + 1));
     }
   };
+
+
+
   return (
     <>
       <Container>
@@ -97,7 +113,7 @@ export default function RecruitFunnel() {
           <Button
             variant={step !== 1 ? "primary" : "secondary"}
             size="small"
-            onClick={() => setStep((prev) => Math.max(1, prev - 1))}
+            onClick={handleBefore}
           >
             뒤로
           </Button>
