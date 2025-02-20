@@ -37,10 +37,11 @@ const PageTitleContainer = styled.div`
   width: 100%;
 `;
 
+
 export default function RecruitFunnel() {
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
   const recruit = useRecoilValue<recruitState>(recruitState);
-const {mutate, isPending} = useRecruitMutation();
+const {mutateAsync} = useRecruitMutation();
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -88,7 +89,7 @@ const {mutate, isPending} = useRecruitMutation();
       setStep((prev) => Math.min(4, prev + 1));
 
       if(step===4){
-        mutate(recruit);
+        mutateAsync(recruit);
       }
     }
   };
