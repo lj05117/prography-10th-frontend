@@ -25,3 +25,7 @@ export const StyledText = styled.div`
         text-decoration: ${(props) => (props.hoverEffect ? "underline" : "none")}; /* ✅ 마우스 호버 시 밑줄 */
     }
 `;
+
+export const HeaderComponent = styled.header`
+  font-size: ${textSize["large"]};
+`;
