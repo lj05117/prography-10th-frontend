@@ -10,6 +10,7 @@ import PageTitle from "../../components/PageTitle.tsx";
 import Button from "../../styles/button.ts";
 import { useRecoilValue } from "recoil";
 import { recruitState } from "../../stores/ButtonState.ts";
+import {useRecruitMutation} from "../../hooks/recruit-funnel.ts";
 
 const Container = styled.div`
   position: fixed;
@@ -38,7 +39,8 @@ const PageTitleContainer = styled.div`
 
 export default function RecruitFunnel() {
   const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
-  const recruit = useRecoilValue(recruitState);
+  const recruit = useRecoilValue<recruitState>(recruitState);
+const {mutate, isPending} = useRecruitMutation();
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -84,6 +86,10 @@ export default function RecruitFunnel() {
     if (validateStep()) {
       scrollToTop()
       setStep((prev) => Math.min(4, prev + 1));
+
+      if(step===4){
+        mutate(recruit);
+      }
     }
   };
 
