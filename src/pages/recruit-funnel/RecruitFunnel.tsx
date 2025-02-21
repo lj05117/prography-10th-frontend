@@ -44,9 +44,13 @@ export default function RecruitFunnel() {
   const resetRecruit = useResetRecoilState(recruitState);
   const {mutateAsync} = useRecruitMutation();
 
+
   useEffect(() => {
-    resetRecruit();
-  }, []);
+    if(step===4){
+      resetRecruit();
+      mutateAsync(recruit);
+    }
+  }, [step]);
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -92,11 +96,6 @@ export default function RecruitFunnel() {
     if (validateStep()) {
       scrollToTop()
       setStep((prev) => Math.min(4, prev + 1));
-
-      if(step===4){
-        mutateAsync(recruit);
-        resetRecruit();
-      }
     }
   };
 
