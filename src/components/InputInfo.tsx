@@ -46,7 +46,7 @@ export default function InputInfo({ id, placeholder, value, onChange, type }) {
   };
 
   const setPhoneFormat = (input) => {
-    return input.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/, "$1-$2-$3");
+    return input.replace(/(^02.{0}|^01.{1}|[0-9]{3})([0-9]{3,4})([0-9]{4})/, "$1-$2-$3");
   };
 
 
