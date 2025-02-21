@@ -5,10 +5,10 @@ import Complete from "./Complete.tsx";
 import ProgressStage from "../../components/ProgressStage.tsx";
 import Header from "../../components/Header.tsx";
 import styled from "styled-components";
-import { useState } from "react";
+import {useEffect, useState} from "react";
 import PageTitle from "../../components/PageTitle.tsx";
 import { Button, ButtonContainer } from "../../styles/button.ts";
-import { useRecoilValue } from "recoil";
+import {useRecoilValue, useResetRecoilState} from "recoil";
 import { recruitState } from "../../stores/ButtonState.ts";
 import {useRecruitMutation} from "../../hooks/recruit-funnel.ts";
 
@@ -39,9 +39,14 @@ const PageTitleContainer = styled.div`
 
 
 export default function RecruitFunnel() {
-  const [step, setStep] = useState(1); //todo: 페이지 별 값 설정
+  const [step, setStep] = useState(1);
   const recruit = useRecoilValue<recruitState>(recruitState);
-const {mutateAsync} = useRecruitMutation();
+  const resetRecruit = useResetRecoilState(recruitState);
+  const {mutateAsync} = useRecruitMutation();
+
+  useEffect(() => {
+    resetRecruit();
+  }, []);
 
   const titles = ["", "개인정보 수집 동의", "기본 정보", "지원 정보"];
   const descriptions = [
@@ -90,6 +95,7 @@ const {mutateAsync} = useRecruitMutation();
 
       if(step===4){
         mutateAsync(recruit);
+        resetRecruit();
       }
     }
   };
@@ -112,8 +118,6 @@ const {mutateAsync} = useRecruitMutation();
         <>{step === 2 && <PersonalInfo />}</>
         <>{step === 3 && <ApplicationInfo />}</>
         <>{step === 4 && <Complete />}</>
-        {/*  //todo: 이 컴포넌트에서 tanstack query
-        연결하기*/}
       </ContentContainer>
       <ButtonContainer>
         {step < 4 && (
