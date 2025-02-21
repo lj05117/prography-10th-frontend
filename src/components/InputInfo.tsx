@@ -27,22 +27,33 @@ const ErrorMessage = styled.p`
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
-export default function InputInfo({ id, placeholder, value, onChange, type }) {
+export default function InputInfo({ id, placeholder, value, onChange }) {
   const [hasError, setHasError] = useState(false);
+  const [errorMessage, setErrorMessage] = useState("이 필드는 필수 입력값입니다.");
   const handleBlur = () => {
     if (!value.trim()) {
       setHasError(true);
     }
   };
+
+  const validateEmail = (email) => {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  };
+
   const handleChange = (e) => {
-    if (type === "phone") {
-      value = setPhoneFormat(e.target.value.replace(/[^0-9]/g, ''));
-      onChange(id, value);
+    let inputValue = e.target.value;
+
+    if (id === "phone") {
+      inputValue = setPhoneFormat(inputValue.replace(/[^0-9]/g, ""));
+      onChange(id, inputValue);
+    } else {
+      onChange(id, inputValue);
+
+      if (id === "email") {
+        setHasError(!validateEmail(inputValue)); // 이메일 검증 후 에러 상태 업데이트
+        if(!validateEmail(inputValue)) setErrorMessage("올바른 이메일 형식을 입력해주세요.")
+      }
     }
-    else{
-      onChange(id, e.target.value);
-    }
-    setHasError(false);
   };
 
   const setPhoneFormat = (input) => {
@@ -61,7 +72,7 @@ export default function InputInfo({ id, placeholder, value, onChange, type }) {
         onBlur={handleBlur}
         hasError={hasError}
       />
-      <ErrorMessage show={hasError}>이 필드는 필수 입력값입니다.</ErrorMessage>
+      <ErrorMessage show={hasError}>{errorMessage}</ErrorMessage>
     </>
   );
 }
