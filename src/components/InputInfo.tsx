@@ -27,7 +27,7 @@ const ErrorMessage = styled.p`
   display: ${(props) => (props.show ? "block" : "none")};
 `;
 
-export default function InputInfo({ id, placeholder, value, onChange }) {
+export default function InputInfo({ id, placeholder, value, onChange, type }) {
   const [hasError, setHasError] = useState(false);
   const handleBlur = () => {
     if (!value.trim()) {
@@ -35,9 +35,22 @@ export default function InputInfo({ id, placeholder, value, onChange }) {
     }
   };
   const handleChange = (e) => {
+    if (type === "phone") {
+      value = setPhoneFormat(e.target.value.replace(/[^0-9]/g, ''));
+      onChange(id, value);
+    }
+    else{
+      onChange(id, e.target.value);
+    }
     setHasError(false);
-    onChange(id, e.target.value);
   };
+
+  const setPhoneFormat = (input) => {
+    return input.replace(/(^02.{0}|^01.{1}|[0-9]{3,4})([0-9]{3,4})([0-9]{4})/, "$1-$2-$3");
+  };
+
+
+
   return (
     <>
       <StyledInput

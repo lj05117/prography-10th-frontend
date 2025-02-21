@@ -36,6 +36,7 @@ export default function PersonalInfo({ name, email, phone }) {
           placeholder={"예시 : 010-1234-5678"}
           value={recruit.personal.phone}
           onChange={handleChange}
+          type={"phone"}
         />
       </ContentContainer>
     </>
