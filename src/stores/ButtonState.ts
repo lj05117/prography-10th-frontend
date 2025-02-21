@@ -1,4 +1,4 @@
-import { atom, selector } from "recoil";
+import { atom } from "recoil";
 import { recoilPersist } from "recoil-persist";
 
 const { persistAtom } = recoilPersist();
@@ -25,18 +25,4 @@ export const recruitState = atom<recruitState>({
     application: null,
   },
   effects_UNSTABLE: [persistAtom],
-});
-export const recruitPrivacyState = selector({
-  key: "recruitPrivacyState",
-  get: ({ get }) => get(recruitState).privacy,
-});
-
-export const recruitPersonalState = selector({
-  key: "recruitPersonalState",
-  get: ({ get }) => get(recruitState).personal,
-});
-
-export const recruitApplicationState = selector({
-  key: "recruitApplicationState",
-  get: ({ get }) => get(recruitState).application,
 });
