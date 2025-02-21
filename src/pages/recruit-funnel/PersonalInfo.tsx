@@ -3,7 +3,7 @@ import ContentContainer from "../../components/ContentContainer.tsx";
 import { useRecoilState } from "recoil";
 import { recruitState } from "../../stores/ButtonState.ts";
 
-export default function PersonalInfo({ name, email, phone }) {
+export default function PersonalInfo() {
   const [recruit, setRecruit] = useRecoilState(recruitState);
 
   const handleChange = (field, value) => {
